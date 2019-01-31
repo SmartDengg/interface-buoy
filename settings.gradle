@@ -1,0 +1,2 @@
+include ':interface-buoy-app', ':interface-buoy-gradle', ':buildSrc',
+    ':interface-buoy-runtime'

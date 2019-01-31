@@ -1,0 +1,24 @@
+apply plugin: 'groovy'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.SmartDengg'
+
+//noinspection GroovyUnusedAssignment
+sourceCompatibility = JavaVersion.VERSION_1_8
+//noinspection GroovyUnusedAssignment
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+  jcenter()
+  mavenCentral()
+  google()
+}
+
+dependencies {
+  compile gradleApi()
+  compile localGroovy()
+  implementation 'com.android.tools.build:gradle:3.2.1'
+  implementation 'commons-io:commons-io:2.6'
+  implementation 'org.ow2.asm:asm:7.0'
+  implementation 'org.ow2.asm:asm-commons:6.0'
+}
