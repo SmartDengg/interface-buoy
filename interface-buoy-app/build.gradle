@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.smartdengg.interfacebuoy'
+//apply plugin: 'com.smartdengg.interfacebuoy'
 
 android {
   compileSdkVersion 28

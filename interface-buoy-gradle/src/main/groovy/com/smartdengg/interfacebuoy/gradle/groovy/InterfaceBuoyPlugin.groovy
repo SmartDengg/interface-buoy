@@ -19,14 +19,6 @@ class InterfaceBuoyPlugin implements Plugin<Project> {
           "'com.android.application' or 'com.android.library' or 'com.android.feature' plugin required.")
     }
 
-    //    project.repositories {
-    //      maven { url "https://jitpack.io" }
-    //    }
-
-    //    project.dependencies {
-    //      implementation project.rootProject.findProject("nonnull-interface-compiler")
-    //    }
-
     def extension = project.extensions.getByName("android") as BaseExtension
     extension.registerTransform(new InterfaceBuoyTransform())
   }
