@@ -5,13 +5,15 @@ package com.smartdengg.interfacebuoy.compiler;
  * 作者:  SmartDengg <br>
  * 描述:
  */
-public class Utils {
+class Utils {
 
   private Utils() {
     throw new AssertionError("no instance");
   }
 
   static boolean validateInterface(Class<?>[] interfaces) {
-    return interfaces.length <= 1 && interfaces[0].getInterfaces().length == 0;
+    return interfaces != null
+        && interfaces.length == 1
+        && interfaces[0].getInterfaces().length == 0;
   }
 }

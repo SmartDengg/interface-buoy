@@ -6,7 +6,7 @@ import java.lang.reflect.Proxy;
 /**
  * 创建时间:  2019/01/11 16:54 <br>
  * 作者:  SmartDengg <br>
- * 描述:
+ * 描述:  combine dynamic proxy and reflection to delegate the interface reference
  */
 public final class InterfaceBuoy {
 
