@@ -9,7 +9,7 @@ I wrote a [blog]() to analyze the principles of the `?.` operators in kotlin and
 Note that we only modify the method defined in the java interface, that is which will trigger the [invokeinterface](https://cs.au.dk/~mis/dOvs/jvmspec/ref--32.html) instruction at runtime.
 
 
-Blog link : [在Java 中安全使用接口函数]()
+Blog link : [在Java 中安全使用接口引用]()
 
 ## Usage
 
