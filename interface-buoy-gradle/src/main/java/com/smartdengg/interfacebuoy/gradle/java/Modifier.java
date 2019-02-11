@@ -81,7 +81,8 @@ public class Modifier extends ClassVisitor implements Opcodes {
               && ((MethodInsnNode) node).name.equals(name)
               && ((MethodInsnNode) node).desc.equals(desc))) {
 
-            insertBeforeInvokeInterface(node, convertSignature(owner, name, desc));
+            insertBeforeInvokeInterface(node, Type.getObjectType(owner).getClassName(),
+                convertSignature(owner, name, desc));
 
             iterator.remove();
             break;
@@ -91,16 +92,17 @@ public class Modifier extends ClassVisitor implements Opcodes {
       super.visitMethodInsn(opcode, owner, name, desc, itf);
     }
 
-    private void insertBeforeInvokeInterface(AbstractInsnNode node, String name) {
+    private void insertBeforeInvokeInterface(AbstractInsnNode node, String className, String desc) {
       AbstractInsnNode previous = node.getPrevious();
       if (previous instanceof MethodInsnNode) {
-        insertBeforeInvokeInterface(previous, name);
+        insertBeforeInvokeInterface(previous, className, desc);
       } else {
-        super.visitLdcInsn(name);
+        super.visitLdcInsn(className);
+        super.visitLdcInsn(desc);
         super.visitMethodInsn(INVOKESTATIC, //
             "com/smartdengg/interfacebuoy/compiler/InterfaceBuoy", //
             "wrap", //
-            "(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;", //
+            "(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;",
             false);
 
         if (previous != null) {

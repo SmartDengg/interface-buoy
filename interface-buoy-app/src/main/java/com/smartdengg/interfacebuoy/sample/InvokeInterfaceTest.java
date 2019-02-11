@@ -1,5 +1,9 @@
 package com.smartdengg.interfacebuoy.sample;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
 /**
  * 创建时间:  2019/01/11 15:52 <br>
  * 作者:  SmartDengg <br>
@@ -8,6 +12,10 @@ package com.smartdengg.interfacebuoy.sample;
 public class InvokeInterfaceTest {
 
   private Callback callback;
+
+  private void m(Callback callback) {
+    ProxyHandler.wrap(callback, Callback.class);
+  }
 
   private void m0(Callback callback) {
     if (callback != null) {
@@ -60,5 +68,23 @@ public class InvokeInterfaceTest {
     void on(Object object);
 
     String get();
+  }
+
+  public static final class ProxyHandler {
+
+    static <T> T wrap(final T reference, Class<? extends T> interfacee) {
+
+      if (interfacee.isInterface()) {
+        return (T) Proxy.newProxyInstance(interfacee.getClassLoader(), new Class[] { interfacee },
+            new InvocationHandler() {
+              @Override public Object invoke(Object proxy, Method method, Object[] args)
+                  throws Throwable {
+                if (reference == null) return null;
+                return method.invoke(reference, args);
+              }
+            });
+      }
+      return reference;
+    }
   }
 }

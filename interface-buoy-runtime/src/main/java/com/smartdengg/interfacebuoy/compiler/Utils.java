@@ -11,9 +11,7 @@ class Utils {
     throw new AssertionError("no instance");
   }
 
-  static boolean validateInterface(Class<?>[] interfaces) {
-    return interfaces != null
-        && interfaces.length == 1
-        && interfaces[0].getInterfaces().length == 0;
+  static boolean validateInterface(Class<?> interfacee) {
+    return interfacee != null && interfacee.isInterface() && interfacee.getInterfaces().length == 0;
   }
 }

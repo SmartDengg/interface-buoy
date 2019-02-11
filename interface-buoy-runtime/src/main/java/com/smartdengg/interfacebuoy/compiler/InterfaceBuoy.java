@@ -14,18 +14,23 @@ public final class InterfaceBuoy {
 
   private static final String TAG = "BUOY";
 
-  public static <T> T wrap(T instance, Object value, String desc) {
-    Class<?>[] interfaces = instance.getClass().getInterfaces();
-    if (Utils.validateInterface(interfaces)) {
+  public static <T> T wrap(T instance, Object value, String interfaceName, String desc) {
 
-      if (loggable) {
-        Log.d(TAG, "BUOY INTERFACE: " + desc);
-        Log.d(TAG, "VALUE = " + Strings.toString(value));
+    try {
+      Class<?> interfacee = Class.forName(interfaceName);
+      if (Utils.validateInterface(interfacee)) {
+
+        if (loggable) {
+          Log.d(TAG, "BUOY INTERFACE: " + desc);
+          Log.d(TAG, "VALUE = " + Strings.toString(value));
+        }
+
+        //noinspection unchecked
+        return (T) Proxy.newProxyInstance(interfacee.getClassLoader(), new Class[] { interfacee },
+            new InvocationHandlerAdapter(instance));
       }
+    } catch (Exception ignore) {
 
-      //noinspection unchecked
-      return (T) Proxy.newProxyInstance(instance.getClass().getClassLoader(),
-          new Class[] { interfaces[0] }, new InvocationHandlerAdapter(instance));
     }
     return instance;
   }

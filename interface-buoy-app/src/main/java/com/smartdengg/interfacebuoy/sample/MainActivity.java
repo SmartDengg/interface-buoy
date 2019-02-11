@@ -3,6 +3,7 @@ package com.smartdengg.interfacebuoy.sample;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import com.smartdengg.interfacebuoy.compiler.InterfaceBuoy;
 
@@ -13,6 +14,7 @@ import com.smartdengg.interfacebuoy.compiler.InterfaceBuoy;
  */
 public class MainActivity extends Activity {
 
+  private static final String TAG = MainActivity.class.getSimpleName();
   Callback callback;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,9 +24,12 @@ public class MainActivity extends Activity {
 
     setCallback(new Callback() {
       @Override public void on(View view) {
-        /*no-op*/
+        Log.d(TAG, "hello world");
       }
     });
+
+    //Test null interface reference
+    //setCallback(null);
 
     findViewById(R.id.text).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {

@@ -11,7 +11,7 @@ class InterfaceBuoyTransform extends Transform {
 
   @Override
   String getName() {
-    return 'interfacebuoy'
+    return 'interfaceBuoy'
   }
 
   @Override
