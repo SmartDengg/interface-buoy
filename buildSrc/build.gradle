@@ -10,10 +10,10 @@ dependencies {
   implementation 'com.android.tools.build:gradle:3.3.0'
 }
 
-sourceSets {
-  main {
-    groovy.srcDirs = ['../interface-buoy-gradle/src/main/groovy']
-    java.srcDirs = ['../interface-buoy-gradle/src/main/java']
-    resources.srcDirs = ['../interface-buoy-gradle/src/main/resources']
-  }
-}
+//sourceSets {
+//  main {
+//    groovy.srcDirs = ['../interface-buoy-gradle/src/main/groovy']
+//    java.srcDirs = ['../interface-buoy-gradle/src/main/java']
+//    resources.srcDirs = ['../interface-buoy-gradle/src/main/resources']
+//  }
+//}

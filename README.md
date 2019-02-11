@@ -35,7 +35,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.github.SmartDengg.interface-buoy:interface-buoy-gradle:1.0.0'
+        classpath 'com.github.SmartDengg.interface-buoy:interface-buoy-gradle:1.1.0'
     }
 }
 
@@ -44,7 +44,7 @@ apply plugin: 'com.smartdengg.interfacebuoy' // or apply plugin: 'interfacebuoy'
 
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
-  implementation 'com.github.SmartDengg.interface-buoy:interface-buoy-runtime:1.0.0'
+  implementation 'com.github.SmartDengg.interface-buoy:interface-buoy-runtime:1.1.0'
 }
 
 ```
