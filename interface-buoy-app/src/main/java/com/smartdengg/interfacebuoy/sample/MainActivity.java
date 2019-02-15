@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import com.smartdengg.interfacebuoy.compiler.InterfaceBuoy;
+import com.smartdengg.interfacebuoy.compiler.BuoySettings;
 
 /**
  * 创建时间:  2019/01/31 18:02 <br>
@@ -20,29 +20,28 @@ public class MainActivity extends Activity {
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    InterfaceBuoy.loggable = true;
+    BuoySettings.loggable = true;
 
+    //Test null interface reference
     setCallback(new Callback() {
-      @Override public void on(View view) {
-        Log.d(TAG, "hello world");
+      @Override public void onClick(View view) {
+        Log.d(TAG,"hello world");
       }
     });
 
-    //Test null interface reference
-    //setCallback(null);
-
-    findViewById(R.id.text).setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        callback.on(v);
+        callback.onClick(v);
       }
     });
   }
 
-  private void setCallback(Callback callback) {
+  public void setCallback(Callback callback) {
     this.callback = callback;
   }
 
   interface Callback {
-    void on(View view);
+
+    void onClick(View view);
   }
 }

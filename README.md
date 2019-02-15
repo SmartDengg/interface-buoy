@@ -51,7 +51,7 @@ dependencies {
 
 #### Optional
 
-In the java code you can use `InterfaceBuoy.loggable = true` to control whether to print the log, the default is not to print the log.
+In the java code you can use `BuoySettings.loggable = true` to control whether to print the log, the default is not to print the log.
 
 
 #### Support

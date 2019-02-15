@@ -1,12 +1,10 @@
 package com.smartdengg.interfacebuoy.gradle.groovy
 
-import com.smartdengg.interfacebuoy.gradle.java.CompactClassWriter
-import com.smartdengg.interfacebuoy.gradle.java.Method
-import com.smartdengg.interfacebuoy.gradle.java.MethodInstCollector
-import com.smartdengg.interfacebuoy.gradle.java.Modifier
+import com.smartdengg.interfacebuoy.gradle.java.BuoyTransformer
 import groovy.transform.PackageScope
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassWriter
+import org.objectweb.asm.tree.ClassNode
 
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
@@ -48,31 +46,14 @@ class Processor {
   private static byte[] visitAndReturnBytecode(byte[] originBytes) {
 
     ClassReader classReader = new ClassReader(originBytes)
-    ClassWriter classWriter = new CompactClassWriter(classReader,
-        ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS)
 
-    Map<String, List<Method>> classNonEmptyMethods = collectNonMethods(originBytes)
-    Modifier classAdapter = new Modifier(classWriter, classNonEmptyMethods)
-    try {
-      classReader.accept(classAdapter, ClassReader.EXPAND_FRAMES)
-      return classWriter.toByteArray()
-    } catch (Exception e) {
-      println "Exception occurred when visit code \n " + e.printStackTrace()
-    }
+    ClassNode classNode = new ClassNode()
+    classReader.accept(classNode, 0)
+    BuoyTransformer.transform(classNode)
 
-    return originBytes
-  }
+    ClassWriter classWriter = new ClassWriter(0)
+    classNode.accept(classWriter)
 
-  private static Map<String, List<Method>> collectNonMethods(byte[] bytes) {
-
-    ClassReader classReader = new ClassReader(bytes)
-    MethodInstCollector checker = new MethodInstCollector()
-    try {
-      classReader.accept(checker, ClassReader.SKIP_FRAMES)
-    } catch (Exception e) {
-      println "Exception occurred when visit code \n " + e.printStackTrace()
-    }
-
-    return checker.getMethods()
+    return classWriter.toByteArray()
   }
 }

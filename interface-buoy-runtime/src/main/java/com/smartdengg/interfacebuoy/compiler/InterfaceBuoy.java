@@ -10,20 +10,13 @@ import java.lang.reflect.Proxy;
  */
 public final class InterfaceBuoy {
 
-  public static boolean loggable = false;
-
-  private static final String TAG = "BUOY";
-
-  public static <T> T wrap(T instance, Object value, String interfaceName, String desc) {
+  public static <T> T proxy(T instance, String interfaceName, String descriptor) {
 
     try {
       Class<?> interfacee = Class.forName(interfaceName);
       if (Utils.validateInterface(interfacee)) {
 
-        if (loggable) {
-          Log.d(TAG, "BUOY INTERFACE: " + desc);
-          Log.d(TAG, "VALUE = " + Strings.toString(value));
-        }
+        if (BuoySettings.loggable) Log.d(BuoySettings.TAG, "WRAPPER INTERFACE: " + descriptor);
 
         //noinspection unchecked
         return (T) Proxy.newProxyInstance(interfacee.getClassLoader(), new Class[] { interfacee },
