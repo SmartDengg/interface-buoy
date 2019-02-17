@@ -31,7 +31,7 @@ final class InvocationHandlerAdapter implements InvocationHandler {
             Log.e(BuoySettings.TAG, stackTrace[i].toString());
           }
         }
-    }
+      }
 
       return null;
     }
