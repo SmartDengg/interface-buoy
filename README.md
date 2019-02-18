@@ -61,6 +61,47 @@ If the invoked interface method has a return type but not a `void` type, its byt
 - [x] void return type
 - [ ] other return type
 
+
+## Principle
+
+Before:
+
+
+
+```
+
+invokeinterface #3,  2            // InterfaceMethod Callback.onProgress:(I)V
+
+
+```
+
+
+After:
+
+
+```
+
+invokestatic  #23                 // Method buoy$onProgress:(LCallback;I)V
+
+
+static void buoy$onProgress(JavaSample$Callback, int);
+Code:
+   0: aload_0
+   1: ldc           #25                 // String Callback
+   3: ldc           #27                 // String Callback.onProgress:(int)void
+   5: invokestatic  #33                 // Method com/smartdengg/interfacebuoy/compiler/InterfaceBuoy.proxy:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;
+   8: iload_1
+   9: invokeinterface #37,  2           // InterfaceMethod Callback.onProgress:(I)V
+  14: return
+
+
+```
+
+1. Replaces `invokeinterface ` with `invokestatic` at compile time.
+
+2. Generated `Buoy$onProgress` method at compile time to prevent calling interface methods on an null object.
+
+
 ## About me
 
 email : hi4joker@gmail.com

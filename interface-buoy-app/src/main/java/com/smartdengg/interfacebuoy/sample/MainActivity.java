@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import com.smartdengg.interfacebuoy.compiler.BuoySettings;
 
 /**
  * 创建时间:  2019/01/31 18:02 <br>
@@ -20,7 +19,6 @@ public class MainActivity extends Activity {
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    BuoySettings.loggable = true;
 
     //Test null interface reference
     setCallback(new Callback() {
