@@ -20,12 +20,13 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    //Test null interface reference
     setCallback(new Callback() {
       @Override public void onClick(View view) {
-        Log.d(TAG,"hello world");
+        Log.d(TAG, "hello world");
       }
     });
+
+    //setCallback(null);
 
     findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
