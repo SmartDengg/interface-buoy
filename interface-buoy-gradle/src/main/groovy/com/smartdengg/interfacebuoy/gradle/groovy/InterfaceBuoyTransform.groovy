@@ -26,7 +26,7 @@ class InterfaceBuoyTransform extends Transform {
 
   @Override
   boolean isIncremental() {
-    return false
+    return true
   }
 
   @Override
